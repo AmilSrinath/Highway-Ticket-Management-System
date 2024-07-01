@@ -1,0 +1,40 @@
+package lk.ijse.gdse.ticketservice.controller;
+
+import lk.ijse.gdse.ticketservice.dto.TicketDTO;
+import lk.ijse.gdse.ticketservice.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author Amil Srinath
+ */
+@RestController
+@RequestMapping("api/v1/ticket")
+public class TicketController {
+    @Autowired
+    private TicketService ticketService;
+
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "Ticket Service is up and running";
+    }
+
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> save(@RequestBody TicketDTO ticketDTO) {
+        ticketService.save(ticketDTO);
+        return ResponseEntity.ok("Ticket saved successfully");
+    }
+
+    @PutMapping("/updateStatus")
+    public ResponseEntity<?> updateStatus(@RequestBody TicketDTO ticketDTO) {
+        ticketService.updateStatus(ticketDTO);
+        return ResponseEntity.ok("Ticket Status updated successfully");
+    }
+
+    @GetMapping("/getAllTickets")
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(ticketService.getAll());
+    }
+}
