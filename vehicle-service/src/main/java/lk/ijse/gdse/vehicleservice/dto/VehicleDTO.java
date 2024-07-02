@@ -15,4 +15,5 @@ public class VehicleDTO {
     private String brand;
     private String model;
     private String color;
+    private String userId;
 }

@@ -1,8 +1,7 @@
 package lk.ijse.gdse.ticketservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lk.ijse.gdse.ticketservice.Enum.TicketStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +22,6 @@ public class Ticket {
     private String vehicleId;
     private String userId;
     private Date issueDate;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TicketStatus status;
 }

@@ -1,4 +1,4 @@
-package lk.ijse.gdse.vehicleservice.entity;
+package lk.ijse.gdse.paymentservice.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author Amil Srinath
  */
@@ -14,12 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "vehicle")
-public class Vehicle {
+@Table(name = "payment")
+public class Payment {
     @Id
-    private String vehicleId;
-    private String brand;
-    private String model;
-    private String color;
+    private String paymentId;
+    private String ticketId;
     private String userId;
+    private double amount;
+    private Date paymentDate;
 }

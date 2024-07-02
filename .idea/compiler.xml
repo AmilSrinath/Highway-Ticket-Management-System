@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="service-reg" />
+        <module name="payment-service" />
+        <module name="vehicle-service" />
+        <module name="api-gateway" />
         <module name="user-service" />
         <module name="config-sever" />
-        <module name="vehicle-service" />
         <module name="ticket-service" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="config-sever" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
       <module name="service-reg" options="-parameters" />
       <module name="ticket-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

@@ -1,5 +1,6 @@
 package lk.ijse.gdse.ticketservice.controller;
 
+import lk.ijse.gdse.ticketservice.Enum.TicketStatus;
 import lk.ijse.gdse.ticketservice.dto.TicketDTO;
 import lk.ijse.gdse.ticketservice.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,17 @@ public class TicketController {
 
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> save(@RequestBody TicketDTO ticketDTO) {
-        ticketService.save(ticketDTO);
-        return ResponseEntity.ok("Ticket saved successfully");
+        ticketDTO.setStatus(TicketStatus.UNPAID);
+        if (ticketService.isExistsUser(ticketDTO.getUserId())) {
+            if (ticketService.isExistsVehicle(ticketDTO.getVehicleId())) {
+                ticketService.save(ticketDTO);
+                return ResponseEntity.ok("Ticket saved successfully");
+            }else {
+                return ResponseEntity.ok("Vehicle does not exists");
+            }
+        }else {
+            return ResponseEntity.ok("User does not exists");
+        }
     }
 
     @PutMapping("/updateStatus")

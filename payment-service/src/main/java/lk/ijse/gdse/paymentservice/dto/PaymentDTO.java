@@ -1,6 +1,5 @@
-package lk.ijse.gdse.ticketservice.dto;
+package lk.ijse.gdse.paymentservice.dto;
 
-import lk.ijse.gdse.ticketservice.Enum.TicketStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +12,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TicketDTO {
+
+public class PaymentDTO {
+    private String paymentId;
     private String ticketId;
-    private String vehicleId;
-    private Date issueDate;
-    private TicketStatus status;
     private String userId;
+    private double amount;
+    private Date paymentDate;
 }

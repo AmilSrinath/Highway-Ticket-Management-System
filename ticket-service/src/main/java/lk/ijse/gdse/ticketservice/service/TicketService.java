@@ -11,4 +11,6 @@ public interface TicketService {
     void save(TicketDTO ticketDTO);
     void updateStatus(TicketDTO ticketDTO);
     List<TicketDTO> getAll();
+    boolean isExistsUser(String userId);
+    boolean isExistsVehicle(String vehicleId);
 }
