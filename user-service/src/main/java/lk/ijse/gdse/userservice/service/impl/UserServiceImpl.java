@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
     public boolean isExistsUser(String userId) {
         return userServiceDAO.existsById(userId);
     }
+
+    @Override
+    public boolean checkCredentials(UserDTO userDTO) {
+        return userServiceDAO.existsByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
+    }
 }

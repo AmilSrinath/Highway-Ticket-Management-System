@@ -22,6 +22,15 @@ public class UserController {
         return "User service is up and running";
     }
 
+    @PostMapping("/checkCredentials")
+    public ResponseEntity<?> checkCredentials(@RequestBody UserDTO userDTO) {
+        if (userService.checkCredentials(userDTO)) {
+            return ResponseEntity.ok("User exists");
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist");
+        }
+    }
+
     @PostMapping(value = "/save",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> save(@RequestBody UserDTO userDTO) {
         userService.save(userDTO);
