@@ -1,8 +1,9 @@
 package lk.ijse.gdse.ticketservice.service.impl;
 
-import jakarta.transaction.Transactional;
+import lk.ijse.gdse.ticketservice.Enum.TicketStatus;
 import lk.ijse.gdse.ticketservice.convertion.Converte;
 import lk.ijse.gdse.ticketservice.dto.TicketDTO;
+import lk.ijse.gdse.ticketservice.entity.Ticket;
 import lk.ijse.gdse.ticketservice.repository.TicketServiceDAO;
 import lk.ijse.gdse.ticketservice.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Amil Srinath
@@ -36,13 +38,13 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void updateStatus(TicketDTO ticketDTO) {
-        ticketServiceDAO.findById(ticketDTO.getTicketId()).ifPresentOrElse(ticket -> {
-            ticket.setStatus(ticketDTO.getStatus());
+    public void updateStatus(String ticketId) {
+        Optional<Ticket> byId = ticketServiceDAO.findById(ticketId);
+        if (byId.isPresent()) {
+            Ticket ticket = byId.get();
+            ticket.setStatus(TicketStatus.PAID);
             ticketServiceDAO.save(ticket);
-        }, () -> {
-            ticketServiceDAO.save(converte.convertToEntity(ticketDTO));
-        });
+        }
     }
 
     @Override
@@ -55,12 +57,7 @@ public class TicketServiceImpl implements TicketService {
         String url = "http://user-service/api/v1/user/existUser/" + userId;
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-
-            if (response.getStatusCode() == HttpStatus.OK) {
-                return true;
-            }else {
-                return false;
-            }
+            return response.getStatusCode() == HttpStatus.OK;
         } catch (HttpClientErrorException e) {
             return false;
         }
@@ -71,17 +68,14 @@ public class TicketServiceImpl implements TicketService {
         String url = "http://vehicle-service/api/v1/vehicle/existVehicle/" + vehicleId;
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-
-            if (response.getStatusCode() == HttpStatus.OK) {
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                return true;
-            }else {
-                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-                return false;
-            }
+            return response.getStatusCode() == HttpStatus.OK;
         } catch (HttpClientErrorException e) {
-            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
             return false;
         }
+    }
+
+    @Override
+    public boolean isExistsTicket(String ticketId) {
+        return ticketServiceDAO.existsById(ticketId);
     }
 }
