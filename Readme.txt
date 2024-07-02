@@ -11,178 +11,196 @@
 
 
 
+# Highway Ticket Management System
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Highway Ticket Management System</title>
-</head>
-<body>
-    <h1>Highway Ticket Management System</h1>
-    <p>This project is a Highway Ticket Management System designed to manage users, vehicles, tickets, and payments. It is built using a microservices architecture with Spring Boot and communicates through REST APIs.</p>
+This project is a Highway Ticket Management System designed to manage users, vehicles, tickets, and payments. It is built using a microservices architecture with Spring Boot and communicates through REST APIs.
 
-    <h2>Features</h2>
-    <ul>
-        <li><strong>User Management</strong>: Create, update, delete, and view users.</li>
-        <li><strong>Vehicle Management</strong>: Manage vehicle information and associate vehicles with users.</li>
-        <li><strong>Ticket Management</strong>: Issue, update, and manage traffic tickets.</li>
-        <li><strong>Payment Management</strong>: Handle payments for issued tickets.</li>
-    </ul>
+## Features
 
-    <h2>Project Structure</h2>
-    <p>The project is divided into several microservices, each responsible for a specific domain:</p>
-    <ul>
-        <li><strong>User Service</strong>: Manages user information.</li>
-        <li><strong>Vehicle Service</strong>: Handles vehicle data.</li>
-        <li><strong>Ticket Service</strong>: Manages tickets issued to vehicles and users.</li>
-        <li><strong>Payment Service</strong>: Handles payments for tickets.</li>
-    </ul>
+- **User Management**: Create, update, delete, and view users.
+- **Vehicle Management**: Manage vehicle information and associate vehicles with users.
+- **Ticket Management**: Issue, update, and manage traffic tickets.
+- **Payment Management**: Handle payments for issued tickets.
 
-    <h2>Technologies Used</h2>
-    <ul>
-        <li><strong>Spring Boot</strong></li>
-        <li><strong>Spring Cloud (Eureka, Config Server)</strong></li>
-        <li><strong>MySQL</strong> for database</li>
-        <li><strong>Postman</strong> for API testing</li>
-    </ul>
+## Project Structure
 
-    <h2>Getting Started</h2>
+The project is divided into several microservices, each responsible for a specific domain:
 
-    <h3>Prerequisites</h3>
-    <ul>
-        <li>Java 11 or higher</li>
-        <li>Maven</li>
-        <li>MySQL</li>
-    </ul>
+1. **User Service**: Manages user information.
+2. **Vehicle Service**: Handles vehicle data.
+3. **Ticket Service**: Manages tickets issued to vehicles and users.
+4. **Payment Service**: Handles payments for tickets.
 
-    <h3>Installation</h3>
-    <ol>
-        <li>Clone the repository:
-            <pre><code>git clone https://github.com/your-username/highway-ticket-management-system.git
-cd highway-ticket-management-system
-            </code></pre>
-        </li>
-        <li>Configure MySQL database in <code>application.properties</code> for each microservice:
-            <pre><code>spring.datasource.url=jdbc:mysql://localhost:3306/YourDatabaseName?createDatabaseIfNotExist=true
-spring.datasource.username=root
-spring.datasource.password=yourpassword
-            </code></pre>
-        </li>
-        <li>Build and run the microservices:
-            <pre><code>cd user-service
-mvn spring-boot:run
+## Technologies Used
 
-cd ../vehicle-service
-mvn spring-boot:run
+- **Spring Boot**
+- **Spring Cloud (Eureka, Config Server)**
+- **MySQL** for database
+- **Postman** for API testing
 
-cd ../ticket-service
-mvn spring-boot:run
+## Getting Started
 
-cd ../payment-service
-mvn spring-boot:run
-            </code></pre>
-        </li>
-    </ol>
+### Prerequisites
 
-    <h3>API Documentation</h3>
-    <p>You can import the Postman collection to test the APIs. <a href="https://www.postman.com/collections/your-collection-link">Download the Postman collection</a>.</p>
+- Java 11 or higher
+- Maven
+- MySQL
 
-    <h3>Example Requests</h3>
+### Installation
 
-    <h4>User Management</h4>
-    <p><strong>Create a User</strong>:</p>
-    <pre><code>POST /users
-Content-Type: application/json
+1. Clone the repository:
 
-{
-    "userId": "1",
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "password": "password123",
-    "role": "USER"
-}
-    </code></pre>
+    ```sh
+    git clone https://github.com/your-username/highway-ticket-management-system.git
+    cd highway-ticket-management-system
+    ```
 
-    <p><strong>Get All Users</strong>:</p>
-    <pre><code>GET /users
-    </code></pre>
+2. Configure MySQL database in `application.properties` for each microservice:
 
-    <p><strong>Update a User</strong>:</p>
-    <pre><code>PUT /users/1
-Content-Type: application/json
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/YourDatabaseName?createDatabaseIfNotExist=true
+    spring.datasource.username=root
+    spring.datasource.password=yourpassword
+    ```
 
-{
-    "name": "John Doe Updated",
-    "email": "john.doe.updated@example.com",
-    "password": "newpassword123",
-    "role": "USER"
-}
-    </code></pre>
+3. Build and run the microservices:
 
-    <p><strong>Delete a User</strong>:</p>
-    <pre><code>DELETE /users/1
-    </code></pre>
+    ```sh
+    cd user-service
+    mvn spring-boot:run
 
-    <h4>Vehicle Management</h4>
-    <p><strong>Create a Vehicle</strong>:</p>
-    <pre><code>POST /vehicles
-Content-Type: application/json
+    cd ../vehicle-service
+    mvn spring-boot:run
 
-{
-    "vehicleId": "V123",
-    "licensePlate": "ABC-123",
-    "model": "Toyota Camry",
-    "userId": "1"
-}
-    </code></pre>
+    cd ../ticket-service
+    mvn spring-boot:run
 
-    <p><strong>Get All Vehicles</strong>:</p>
-    <pre><code>GET /vehicles
-    </code></pre>
+    cd ../payment-service
+    mvn spring-boot:run
+    ```
 
-    <h4>Ticket Management</h4>
-    <p><strong>Create a Ticket</strong>:</p>
-    <pre><code>POST /tickets
-Content-Type: application/json
+### API Documentation
 
-{
-    "ticketId": "T123",
-    "vehicleId": "V123",
-    "userId": "1",
-    "issueDate": "2024-06-26T00:00:00Z",
-    "status": "Open"
-}
-    </code></pre>
+You can import the Postman collection to test the APIs. [Download the Postman collection](https://www.postman.com/collections/your-collection-link).
 
-    <p><strong>Get All Tickets</strong>:</p>
-    <pre><code>GET /tickets
-    </code></pre>
+### Example Requests
 
-    <h4>Payment Management</h4>
-    <p><strong>Create a Payment</strong>:</p>
-    <pre><code>POST /payments
-Content-Type: application/json
+#### User Management
 
-{
-    "paymentId": "P123",
-    "ticketId": "T123",
-    "userId": "1",
-    "amount": 100.00,
-    "paymentDate": "2024-06-26T00:00:00Z",
-    "status": "Paid"
-}
-    </code></pre>
+- **Create a User**:
 
-    <p><strong>Get All Payments</strong>:</p>
-    <pre><code>GET /payments
-    </code></pre>
+    ```http
+    POST /users
+    Content-Type: application/json
 
-    <h2>Contributing</h2>
-    <p>Contributions are welcome! Please fork the repository and create a pull request with your changes.</p>
+    {
+        "userId": "1",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "role": "USER"
+    }
+    ```
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details.</p>
-</body>
-</html>
+- **Get All Users**:
+
+    ```http
+    GET /users
+    ```
+
+- **Update a User**:
+
+    ```http
+    PUT /users/1
+    Content-Type: application/json
+
+    {
+        "name": "John Doe Updated",
+        "email": "john.doe.updated@example.com",
+        "password": "newpassword123",
+        "role": "USER"
+    }
+    ```
+
+- **Delete a User**:
+
+    ```http
+    DELETE /users/1
+    ```
+
+#### Vehicle Management
+
+- **Create a Vehicle**:
+
+    ```http
+    POST /vehicles
+    Content-Type: application/json
+
+    {
+        "vehicleId": "V123",
+        "licensePlate": "ABC-123",
+        "model": "Toyota Camry",
+        "userId": "1"
+    }
+    ```
+
+- **Get All Vehicles**:
+
+    ```http
+    GET /vehicles
+    ```
+
+#### Ticket Management
+
+- **Create a Ticket**:
+
+    ```http
+    POST /tickets
+    Content-Type: application/json
+
+    {
+        "ticketId": "T123",
+        "vehicleId": "V123",
+        "userId": "1",
+        "issueDate": "2024-06-26T00:00:00Z",
+        "status": "Open"
+    }
+    ```
+
+- **Get All Tickets**:
+
+    ```http
+    GET /tickets
+    ```
+
+#### Payment Management
+
+- **Create a Payment**:
+
+    ```http
+    POST /payments
+    Content-Type: application/json
+
+    {
+        "paymentId": "P123",
+        "ticketId": "T123",
+        "userId": "1",
+        "amount": 100.00,
+        "paymentDate": "2024-06-26T00:00:00Z",
+        "status": "Paid"
+    }
+    ```
+
+- **Get All Payments**:
+
+    ```http
+    GET /payments
+    ```
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
